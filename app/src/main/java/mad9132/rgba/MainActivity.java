@@ -7,12 +7,14 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.SeekBar;
 import android.widget.TextView;
+import android.view.View;
 import android.widget.Toast;
+import android.widget.Button;
+
+import model.HSVModel;
 
 import java.util.Observable;
 import java.util.Observer;
-
-import model.RGBAModel;
 
 /**
  * The Controller for RGBAModel.
@@ -22,18 +24,35 @@ public class MainActivity extends AppCompatActivity implements Observer
 {
     // CLASS VARIABLES
     private static final String ABOUT_DIALOG_TAG = "About";
-    private static final String LOG_TAG          = "RGBA";
+    private static final String LOG_TAG          = "HSV";
 
     // INSTANCE VARIABLES
     // Pro-tip: different naming style; the 'm' means 'member'
     private AboutDialogFragment mAboutDialog;
     private TextView            mColorSwatch;
-    private RGBAModel           mModel;
-    private SeekBar             mRedSB;
-    //TODO: declare private members for mGreenSB, mBlueSB, and mAlphaSB
-    private SeekBar             mGreenSB;
-    private SeekBar             mBlueSB;
-    private SeekBar             mAlphaSB;
+    private HSVModel            mModel;
+    private TextView            mHue;
+    private TextView            mSaturation;
+    private TextView            mValue;
+    private SeekBar             mHueSB;
+    private SeekBar             mSaturationSB;
+    private SeekBar             mValueSB;
+
+    private Button              mBlack;
+    private Button              mLime;
+    private Button              mBlue;
+    private Button              mCyan;
+    private Button              mMagenta;
+    private Button              mSilver;
+    private Button              mMaroon;
+    private Button              mOlive;
+    private Button              mGreen;
+    private Button              mPurple;
+    private Button              mTeal;
+    private Button              mNavy;
+
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,35 +65,128 @@ public class MainActivity extends AppCompatActivity implements Observer
 
         // Instantiate a new RGBA model
         // Initialize the model red (max), green (min), blue (min), and alpha (max)
-        mModel = new RGBAModel();
-        mModel.setRed( RGBAModel.MAX_RGB );
-        mModel.setGreen( RGBAModel.MIN_RGB );
-        mModel.setBlue( RGBAModel.MIN_RGB );
-        mModel.setAlpha( RGBAModel.MAX_ALPHA );
+        mModel = new HSVModel();
+        mModel.setHue( HSVModel.MIN_HUE );
+        mModel.setSaturation( HSVModel.MIN_SATURATION );
+        mModel.setValue( HSVModel.MIN_LIGHTNESS );
         // The Model is observing this Controller (class MainActivity implements Observer)
         mModel.addObserver( this );
 
         // reference each View
         mColorSwatch = (TextView) findViewById( R.id.colorSwatch );
-        mRedSB = (SeekBar) findViewById( R.id.redSB );
-        //TODO: reference the remaining <SeekBar>s: green, blue and alpha
-        mGreenSB = (SeekBar) findViewById( R.id.greenSB );
-        mBlueSB = (SeekBar) findViewById( R.id.blueSB );
-        mAlphaSB = (SeekBar) findViewById( R.id.alphaSB );
+        mHue = (TextView) findViewById(R.id.Hue);
+        mHueSB = (SeekBar) findViewById(R.id.HueSB);
+        mSaturation = (TextView) findViewById(R.id.Saturation);
+        mSaturationSB = (SeekBar) findViewById(R.id.SaturationSB);
+        mValue = (TextView) findViewById(R.id.Value);
+        mValueSB = (SeekBar) findViewById(R.id.ValueSB);
+
+        mBlack = (Button) findViewById(R.id.blackButton);
+        mLime = (Button) findViewById(R.id.limeButton);
+        mBlue = (Button) findViewById(R.id.blueButton);
+        mCyan = (Button) findViewById(R.id.cyanButton);
+        mMagenta = (Button) findViewById(R.id.magentaButton);
+        mSilver = (Button) findViewById(R.id.silverButton);
+        mMaroon = (Button) findViewById(R.id.maroonButton);
+        mOlive = (Button) findViewById(R.id.oliveButton);
+        mGreen = (Button) findViewById(R.id.greenButton);
+        mPurple = (Button) findViewById(R.id.purpleButton);
+        mTeal = (Button) findViewById(R.id.tealButton);
+        mNavy = (Button) findViewById(R.id.navyButton);
 
         // set the domain (i.e. max) for each component
-        mRedSB.setMax( RGBAModel.MAX_RGB );
-        //TODO: setMax() for the remaining <SeekBar>s: green, blue and alpha
-        mGreenSB.setMax( RGBAModel.MAX_RGB );
-        mBlueSB.setMax( RGBAModel.MAX_RGB );
-        mAlphaSB.setMax( RGBAModel.MAX_RGB );
+        mHueSB.setMax((int)HSVModel.MAX_HUE);
+        mSaturationSB.setMax((int)HSVModel.MAX_SATURATION);
+        mValueSB.setMax((int)HSVModel.MAX_LIGHTNESS);
 
         // register the event handler for each <SeekBar>
-        mRedSB.setOnSeekBarChangeListener( this );
-        //TODO: register the remaining <SeekBar>s: green, blue and alpha
-        mGreenSB.setOnSeekBarChangeListener( this );
-        mBlueSB.setOnSeekBarChangeListener( this );
-        mAlphaSB.setOnSeekBarChangeListener( this );
+        mHueSB.setOnSeekBarChangeListener(this);
+        mSaturationSB.setOnSeekBarChangeListener(this);
+        mValueSB.setOnSeekBarChangeListener(this);
+
+        // Step 1: create local variables for all buttons and assign the right buttons to the right variables
+        // Step 2: attach onClick listeners to all buttons.
+        // Step 3: call a function to do something (
+
+
+        mBlack.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                int color = getResources().getColor(R.color.black);
+                setColorProgress(color);
+            }
+        });
+
+        mMagenta.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                int color = getResources().getColor(R.color.magenta);
+                setColorProgress(color);
+            }
+        });
+
+        mLime.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                int color = getResources().getColor(R.color.lime);
+                setColorProgress(color);
+            }
+        });
+
+        mCyan.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                int color = getResources().getColor(R.color.cyan);
+                setColorProgress(color);
+            }
+        });
+        mSilver.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                int color = getResources().getColor(R.color.silver);
+                setColorProgress(color);
+            }
+        });
+        mMaroon.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                int color = getResources().getColor(R.color.maroon);
+                setColorProgress(color);
+            }
+        });
+
+        mGreen.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                int color = getResources().getColor(R.color.green);
+                setColorProgress(color);
+            }
+        });
+        mPurple.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                int color = getResources().getColor(R.color.purple);
+                setColorProgress(color);
+            }
+        });
+
+        mTeal.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                int color = getResources().getColor(R.color.teal);
+                setColorProgress(color);
+            }
+        });
+        mNavy.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                int color = getResources().getColor(R.color.navy);
+                setColorProgress(color);
+            }
+        });
+        mBlue.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                int color = getResources().getColor(R.color.blue);
+                setColorProgress(color);
+            }
+        });
+        mOlive.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                int color = getResources().getColor(R.color.olive);
+                setColorProgress(color);
+            }
+        });
+
 
         // initialize the View to the values of the Model
         this.updateView();
@@ -90,50 +202,18 @@ public class MainActivity extends AppCompatActivity implements Observer
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         // Handle presses on the action bar items
-        switch ( item.getItemId() ) {
+
+        switch (item.getItemId()) {
 
             case R.id.action_about:
-                mAboutDialog.show( getFragmentManager(), ABOUT_DIALOG_TAG );
+                mAboutDialog.show(getFragmentManager(), ABOUT_DIALOG_TAG);
                 return true;
-
-            case R.id.action_red:
-                mModel.asRed();
-                return true;
-
-            //TODO: handle the remaining menu items
-
-            case R.id.action_green:
-                mModel.asGreen();
-                return true;
-
-            case R.id.action_blue:
-                mModel.asBlue();
-                return true;
-
-            case R.id.action_black:
-                mModel.asBlack();
-                return true;
-
-            case R.id.action_white:
-                mModel.asWhite();
-                return true;
-
-            case R.id.action_cyan:
-                mModel.asCyan();
-                return true;
-
-            case R.id.action_magenta:
-                mModel.asMagenta();
-                return true;
-
-            case R.id.action_yellow:
-                mModel.asYellow();
-                return true;
-
             default:
-                Toast.makeText(this, "MenuItem: " + item.getTitle(), Toast.LENGTH_LONG).show();
+                Toast.makeText(this, "Color: " + item.getTitle(), Toast.LENGTH_LONG).show();
                 return super.onOptionsItemSelected(item);
         }
+
+
     }
 
     /**
@@ -145,81 +225,79 @@ public class MainActivity extends AppCompatActivity implements Observer
         // Did the user cause this event?
         // YES > continue
         // NO  > leave this method
-        if ( fromUser == false ) {
-            return;
-        }
-
-        // Determine which <SeekBark> caused the event (switch + case)
-        // GET the SeekBar's progress, and SET the model to it's new value
-        switch ( seekBar.getId() ) {
-            case R.id.redSB:
-                mModel.setRed( mRedSB.getProgress() );
+//        if ( fromUser == false ) {
+//            return;
+//        }
+        switch (seekBar.getId()) {
+            case R.id.HueSB:
+                float prog = (float) mHueSB.getProgress();
+                System.out.println(prog);
+                mModel.setHue(prog);
+                mHue.setText(R.string.Hue + prog + "\u00B0");
                 break;
-
-            //TODO: case R.id.greenSB
-
-            case R.id.greenSB:
-                mModel.setGreen( mGreenSB.getProgress() );
+            case R.id.SaturationSB:
+                mModel.setSaturation((float) mSaturationSB.getProgress());
+                mSaturation.setText(R.string.Saturation + mModel.getSaturation() + "%");
                 break;
-
-            //TODO: case R.id.blueSB
-
-            case R.id.blueSB:
-                mModel.setBlue( mBlueSB.getProgress() );
-                break;
-
-            //TODO: case R.id.alphaSB
-
-            case R.id.alphaSB:
-                mModel.setAlpha( mAlphaSB.getProgress() );
+            case R.id.ValueSB:
+                mModel.setValue((float) mValueSB.getProgress());
+                mValue.setText(R.string.Value + mModel.getValue() + "%");
                 break;
         }
     }
 
+    public void setColorProgress(int color){
+        float[] hsvColor = new float[3];
+        Color.colorToHSV(color, hsvColor);
+
+        System.out.println("H: "+hsvColor[0]+" S: "+hsvColor[1]+" V: "+hsvColor[2]);
+        mHueSB.setProgress((int) hsvColor[0]);
+        mSaturationSB.setProgress((int) hsvColor[1] * 100);
+        mValueSB.setProgress((int) hsvColor[2] * 100);
+
+        Toast.makeText(getApplicationContext(), "H: "+ (int) hsvColor[0] +"\u00B0" +
+                "S: "+(int) hsvColor[1] * 100 +"% "+
+                "V: "+(int) hsvColor[2] * 100+"% ", Toast.LENGTH_SHORT).show();
+    }
+
+
     @Override
     public void onStartTrackingTouch(SeekBar seekBar) {
-        // No-Operation
+
     }
 
     @Override
     public void onStopTrackingTouch(SeekBar seekBar) {
-        // No-Operation
+       mHue.setText(R.string.Hue + "");
+       mSaturation.setText(R.string.Saturation + "");
+       mValue.setText(R.string.Value + "");
     }
 
-    // The Model has changed state!
-    // Refresh the View to display the current values of the Model.
-    @Override
-    public void update(Observable observable, Object data) {
-        this.updateView();
+    private void updateHueSB() {
+        mHueSB.setProgress((int) mModel.getHue());
     }
 
-    private void updateBlueSB() {
-        //TODO: set the blueSB's progress to the model's blue value
-        mBlueSB.setProgress( mModel.getBlue() );
+    private void updateSaturationSB() {
+        mSaturationSB.setProgress((int) mModel.getSaturation());
+    }
+
+    private void updateValueSB() {
+        mValueSB.setProgress((int) mModel.getValue());
     }
 
     private void updateColorSwatch() {
-        mColorSwatch.setBackgroundColor(Color.argb(mModel.getAlpha()
-                                                , mModel.getRed()
-                                                , mModel.getGreen()
-                                                , mModel.getBlue()));
+        mColorSwatch.setBackgroundColor(mModel.getHSV());
     }
 
-    private void updateGreenSB() {
-        //TODO: set the greenSB's progress to the model's green value
-        mGreenSB.setProgress( mModel.getGreen() );
-    }
-
-    private void updateRedSB() {
-        //GET the model's red value, and SET the red <SeekBar>
-        mRedSB.setProgress( mModel.getRed() );
-    }
-
-    // synchronize each View component with the Model
     public void updateView() {
         this.updateColorSwatch();
-        this.updateRedSB();
-        this.updateGreenSB();
-        this.updateBlueSB();
+        this.updateHueSB();
+        this.updateSaturationSB();
+        this.updateValueSB();
+    }
+
+    @Override
+    public void update(Observable observable, Object data) {
+        this.updateView();
     }
 }

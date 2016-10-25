@@ -11,97 +11,157 @@
     tools:context=".MainActivity">
 
     <TextView
+        android:id="@+id/colorSwatch"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:id="@+id/colorSwatch"
+        android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:layout_alignParentStart="true"
         android:height="200dp"
         android:background="#000" />
 
     <TextView
+        android:id="@+id/Hue"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="@string/red"
-        android:id="@+id/red"
-        android:labelFor="@+id/redSB"
+        android:layout_above="@+id/HueSB"
         android:layout_alignParentStart="true"
-        android:layout_above="@+id/redSB" />
+        android:text="@string/Hue" />
 
     <SeekBar
+        android:id="@+id/HueSB"
         android:layout_width="fill_parent"
         android:layout_height="30dp"
-        android:id="@+id/redSB"
+        android:layout_alignParentStart="true"
         android:layout_centerVertical="true"
-        android:layout_alignParentStart="true"
-        android:max="255"
-        android:layout_marginBottom="15dp" />
-
+        android:layout_marginBottom="15dp"
+        android:background="@drawable/hue" />
     <TextView
+        android:id="@+id/Saturation"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="@string/green"
-        android:id="@+id/green"
-        android:labelFor="@+id/greenSB"
-        android:layout_below="@+id/redSB"
-        android:layout_alignParentStart="true" />
+        android:text="@string/Saturation"
+        android:layout_below="@+id/Hue"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="34dp" />
 
     <SeekBar
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/green"
-        android:id="@+id/greenSB"
-        android:max="255"
+        android:id="@+id/SaturationSB"
+        android:layout_width="fill_parent"
+        android:layout_height="30dp"
         android:layout_alignParentStart="true"
-        android:layout_alignParentEnd="true" />
-
+        android:layout_below="@id/Saturation"
+        android:layout_centerVertical="true"
+        android:background="@drawable/saturation"
+        android:max="100" />
 
     <TextView
-        android:text="@string/blue"
-        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:id="@+id/Value"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/blue"
-        android:layout_marginTop="20dp"
-        android:layout_below="@+id/greenSB"
-        android:layout_alignParentStart="true" />
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/SaturationSB"
+        android:text="@string/Value" />
 
     <SeekBar
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/blue"
+        android:id="@+id/ValueSB"
+        android:layout_width="fill_parent"
+        android:layout_height="30dp"
         android:layout_alignParentStart="true"
-        android:layout_marginTop="15dp"
-        android:id="@+id/blueSB"
-        android:layout_alignParentEnd="true"
-        android:max="255" />
+        android:layout_below="@id/Value"
+        android:layout_centerVertical="true"
+        android:background="@drawable/value"
+        android:max="100" />
 
-    <TextView
-        android:text="@string/alpha"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:layout_width="wrap_content"
+
+    <HorizontalScrollView
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/alpha"
-        android:layout_below="@+id/blueSB"
-        android:layout_alignParentStart="true"
-        android:layout_marginTop="20dp" />
+        android:layout_below="@id/ValueSB"
+        android:scrollbars="horizontal">
 
-    <SeekBar
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/alphaSB"
-        android:max="255"
-        android:layout_below="@+id/alpha"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentEnd="true" />
+        <LinearLayout
+            android:id="@+id/buttonGroup"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginBottom="@dimen/activity_horizontal_margin"
+            android:layout_marginTop="@dimen/activity_vertical_margin"
+            android:orientation="horizontal">
 
-    <!--TODO: TextView for blue -->
-    <!--TODO: SeekBar for blue -->
+            <Button
+                android:id="@+id/blackButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@color/black" />
 
-    <!--TODO: TextView for alpha -->
-    <!--TODO: SeekBar for alpha -->
+            <Button
+                android:id="@+id/limeButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@color/lime" />
+
+            <Button
+                android:id="@+id/blueButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@color/blue" />
+
+            <Button
+                android:id="@+id/cyanButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@color/cyan" />
+
+            <Button
+                android:id="@+id/magentaButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@color/magenta" />
+
+            <Button
+                android:id="@+id/silverButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@color/silver" />
+
+
+            <Button
+                android:id="@+id/maroonButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@color/maroon" />
+
+            <Button
+                android:id="@+id/oliveButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@color/olive" />
+
+            <Button
+                android:id="@+id/greenButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@color/green" />
+
+            <Button
+                android:id="@+id/purpleButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@color/purple" />
+
+            <Button
+                android:id="@+id/tealButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@color/teal" />
+
+            <Button
+                android:id="@+id/navyButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@color/navy" />
+
+        </LinearLayout>
+    </HorizontalScrollView>
+
 </RelativeLayout>

@@ -11,35 +11,51 @@
 
     <!-- Colours, should always be in the overflow -->
     <item
-        android:id="@+id/action_black"
-        android:title="@string/black"
+        android:id="@+id/black"
+        android:title="@color/black"
         app:showAsAction="never" />
     <item
-        android:id="@+id/action_blue"
-        android:title="@string/blue"
+        android:id="@+id/blue"
+        android:title="@color/blue"
         app:showAsAction="never" />
     <item
-        android:id="@+id/action_cyan"
-        android:title="@string/cyan"
+        android:id="@+id/cyan"
+        android:title="@color/cyan"
         app:showAsAction="never" />
     <item
-        android:id="@+id/action_green"
-        android:title="@string/green"
+        android:id="@+id/lime"
+        android:title="@color/lime"
         app:showAsAction="never" />
     <item
-        android:id="@+id/action_magenta"
-        android:title="@string/magenta"
+        android:id="@+id/magenta"
+        android:title="@color/magenta"
         app:showAsAction="never" />
     <item
-        android:id="@+id/action_red"
-        android:title="@string/red"
+        android:id="@+id/silver"
+        android:title="@color/silver"
         app:showAsAction="never" />
     <item
-        android:id="@+id/action_yellow"
-        android:title="@string/yellow"
+        android:id="@+id/maroon"
+        android:title="@color/maroon"
         app:showAsAction="never" />
     <item
-        android:id="@+id/action_white"
-        android:title="@string/white"
+        android:id="@+id/olive"
+        android:title="@color/olive"
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/green"
+        android:title="@color/green"
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/purple"
+        android:title="@color/purple"
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/teal"
+        android:title="@color/teal"
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/navy"
+        android:title="@color/navy"
         app:showAsAction="never" />
 </menu>
